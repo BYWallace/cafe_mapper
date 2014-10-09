@@ -1,9 +1,9 @@
 class MapController < ApplicationController
 
   def index
-    binding.pry
   end
 
   def search
+    render json: Yelp.client.search("Washington DC")
   end
 end
