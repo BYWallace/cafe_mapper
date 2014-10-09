@@ -4,6 +4,7 @@ class MapController < ApplicationController
   end
 
   def search
-    render json: Yelp.client.search("Washington DC")
+    parameters = { term: "coffee", limit: 10 }
+    render json: Yelp.client.search("Washington DC", parameters)
   end
 end

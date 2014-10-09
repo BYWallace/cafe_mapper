@@ -32,4 +32,25 @@ var initialize = function(startingLat, startingLng) {
 
   // Create a new Google map with the options above.
   var map = new google.maps.Map($("#map-canvas")[0], mapOptions);
+
+  bindControls(map);
 };
+
+// Bind event listeners for search submission
+
+var bindControls = function(map) {
+  // Find container for search box and bind event on submit.
+  var searchContainer = $("#search-container")[0];
+  google.maps.event.addDomListener(searchContainer, "submit", function(e) {
+    e.preventDefault();
+    search(map);
+  });
+
+  var searchButton = $("map-search-submit")[0];
+  google.maps.even.addDomListener(searchButton, "click", function(e) {
+    e.preventDefault();
+    search(map);
+  });
+};
+
+// TODO use built-in Google geocode to turn address into coordinates and send to Rails app for Yelping
