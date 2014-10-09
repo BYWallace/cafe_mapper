@@ -44,4 +44,5 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'yelp', require: 'yelp'
+gem 'yelp'
+gem 'simple_oauth', '~> 0.2'
