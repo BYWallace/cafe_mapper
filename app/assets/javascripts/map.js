@@ -81,8 +81,10 @@ var parseResults = function(data) {
   for (var i=0; i < data.businesses.length; i++) {
     var business = data.businesses[i];
 
-    $("#results").append("<div class='result'><img src='" + business.image_url + "'><div class='business-name'>" +
-      business.name + "</div>" +
+    $("#results").append("<div class='result'><img src='" + business.image_url +
+      "'><div class='business-name'><a target= '_blank' href='" +
+      business.url +"'>" +
+      business.name + "</a></div>" +
       "<div class='business-address'><div>" +
       business.location.display_address[0] +
       "</div><div>" +
