@@ -35,6 +35,11 @@ var initialize = function(startingLat, startingLng) {
   map = new google.maps.Map($("#map-canvas")[0], mapOptions);
 
   bindControls();
+
+  // Populate results and map with coffee shops around user's intiial location.
+  $.post("/search", { lat: startingLat, lng: startingLng }, function(data) {
+    parseResults(data);
+  });
 };
 
 // Bind event listeners for search submission
