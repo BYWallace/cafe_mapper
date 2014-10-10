@@ -16,7 +16,7 @@ The initial view displays cafes based on your location. Please allow a couple of
 
 ### Setup
 
-The live app can be found on Heroku at (http://cafemapper.herokuapp.com)[http://cafemapper.herokuapp.com].
+The live app can be found on Heroku at [http://cafemapper.herokuapp.com](http://cafemapper.herokuapp.com).
 
 If you'd like to set up the app on your local machine, follow the instructions below:
 
