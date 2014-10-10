@@ -4,7 +4,7 @@
 
 CoffeeMapper is an application for locating cafes/coffee shops via current or user inputted location. It adopts the sidebar-map UI model but with an Apple-esque slant on aesthetics.
 
-The initial view displays cafes based on your location. If you input an address, the Rails app communicates with Yelp to re-populate results and communicates with the front-end to re-render the results and adjust the map.
+The initial view displays cafes based on your location. Please allow a couple of seconds for the browser to locate you and retrieve results. If you input an address, the Rails app communicates with Yelp to re-populate results and communicates with the front-end to re-render the results and adjust the map.
 
 ### Technologies Used
 
@@ -16,7 +16,7 @@ The initial view displays cafes based on your location. If you input an address,
 
 ### Setup
 
-The live app can be found on Heroku at (http://coffeemapper.herokuapp.com)[http://coffeemapper.herokuapp.com].
+The live app can be found on Heroku at (http://cafemapper.herokuapp.com)[http://cafemapper.herokuapp.com].
 
 If you'd like to set up the app on your local machine, follow the instructions below:
 
