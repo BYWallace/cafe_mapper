@@ -6,6 +6,18 @@ html, body {
   width: 100%;
 }
 
+h1 {
+  background: rgba(255,255,255, 0.75);
+  border-radius: 5px;
+  font-weight: 100;
+  left: 60%;
+  padding: 10px;
+  position: fixed;
+  text-align: center;
+  top: -3%;
+  z-index: 1;
+}
+
 #map-canvas {
   height: 100%;
   width: 100%;
