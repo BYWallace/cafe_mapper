@@ -57,7 +57,9 @@ var search = function() {
   var searchLocation = $("#map-search input").val();
 
   // Remove any previous results from DOM
-  $("#results").empty();
+  $("#results").fadeOut(400, function() {
+    $(this).empty();
+  });
 
   // POST ajax request to Google geocoder and parse coordinates
   $.post("https://maps.googleapis.com/maps/api/geocode/json?address=" + searchLocation.split(" ").join("+") + "&key=" + googleMapsAPIKey, function(data) {
@@ -85,7 +87,7 @@ var parseResults = function(data) {
       business.location.display_address[0] +
       "</div><div>" +
       business.location.display_address[1] +
-      "</div></div></div>");
+      "</div></div></div>").hide().fadeIn(400);
   }
 };
 
