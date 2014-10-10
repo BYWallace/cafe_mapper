@@ -3,6 +3,7 @@
   margin: 10px;
   position: absolute;
   top: 0;
+  width: 33%;
 
   #map-search {
     box-shadow: 2px 2px 3px #999;
@@ -12,7 +13,7 @@
     input {
       height: 30px;
       padding-left: 10px;
-      width: 450px;
+      width: 80%;
     }
 
     form a {
@@ -20,6 +21,25 @@
       color: #fff;
       display: inline-block;
       padding: 7px 9px 7px 9px;
+    }
+  }
+
+  #results {
+
+    margin-top: 15px;
+    width: 100%;
+
+    .result {
+      background-color: #fff;
+      display: inline-block;
+      margin-bottom: 5px;
+      width: 100%;
+
+      img {
+        display: inline-block;
+        float: left;
+        height: 50px;
+      }
     }
   }
 }

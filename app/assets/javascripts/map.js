@@ -68,8 +68,19 @@ var panToCoordinates = function(data) {
   map.panTo(geoCoordinates);
 
   $.post("/search", geoCoordinates, function(data) {
-    console.log(data);
+    parseResults(data);
   });
+};
+
+var parseResults = function(data) {
+  for (var i=0; i < data.businesses.length; i++) {
+    var business = data.businesses[i];
+
+    $("#results").append("<div class='result'><img src='" + business.image_url + "'><div class='business-name'>" +
+      business.name + "</div>" +
+      "<div class='business-address'>" + business.location.display_address.join("\n") +
+      "</div></div>");
+  }
 };
 
 // TODO use built-in Google geocode to turn address into coordinates and send to Rails app for Yelping
