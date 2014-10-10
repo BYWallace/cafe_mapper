@@ -1,4 +1,5 @@
 var markersArray = [];
+var resultsArray = [];
 var appleMapsStyle = [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#a2daf2"}]},{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"color":"#f7f1df"}]},{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#d0e3b4"}]},{"featureType":"landscape.natural.terrain","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#bde6ab"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.medical","elementType":"geometry","stylers":[{"color":"#fbd3da"}]},{"featureType":"poi.business","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffe15f"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#efd151"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"color":"black"}]},{"featureType":"transit.station.airport","elementType":"geometry.fill","stylers":[{"color":"#cfb2db"}]}];
 var googleMapsAPIKey = "AIzaSyBBC2BrtSuloODCOhMgRugWNqmBgDFWcpc";
 var map;
@@ -54,7 +55,10 @@ var bindControls = function() {
 };
 
 var search = function() {
+  // Empty the arrays to prepare for new results.
+  var resultsArray = [];
   var searchLocation = $("#map-search input").val();
+  clearMarkers();
 
   // Remove any previous results from DOM
   $("#results").fadeOut(400, function() {
@@ -81,6 +85,7 @@ var parseResults = function(data) {
   for (var i=0; i < data.businesses.length; i++) {
     var business = data.businesses[i];
 
+    // Construct HTML for each listing and append to the DOM with fade in effect.
     $("#results").append("<div class='result'><img src='" + business.image_url +
       "'><div class='business-name'><a target= '_blank' href='" +
       business.url +"'>" +
@@ -88,9 +93,41 @@ var parseResults = function(data) {
       "<div class='business-address'><div>" +
       business.location.display_address[0] +
       "</div><div>" +
-      business.location.display_address[1] +
+      business.location.display_address[business.location.display_address.length - 1] +
       "</div></div></div>").hide().fadeIn(400);
+
+    resultsArray.push(business);
+  }
+
+  placeMarkers(resultsArray);
+};
+
+var placeMarkers = function(resultsArray) {
+  for (var i=0; i<resultsArray.length; i++) {
+
+    // If there are coordinates in the Yelp data, use those to place a marker on the map.
+    if (resultsArray[i].location.coordinate) {
+      var locationCoordinates = resultsArray[i].location.coordinate;
+      var coordinates = { lat: locationCoordinates.latitude, lng: locationCoordinates.longitude };
+
+      var marker = new google.maps.Marker({
+        animation: google.maps.Animation.DROP,
+        map: map,
+        position: coordinates,
+        title: resultsArray[i].name
+      });
+
+      // Save the marker object for deletion later.
+      markersArray.push(marker);
+    }
   }
 };
 
-// TODO use built-in Google geocode to turn address into coordinates and send to Rails app for Yelping
+//  Remove all markers from map by setting them to null.
+var clearMarkers = function() {
+  markersArray.forEach(function(marker) {
+    marker.setMap(null);
+  });
+
+  markersArray = [];
+};
