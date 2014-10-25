@@ -24,6 +24,7 @@ IMPORTANT: You will need to provide your own Yelp and Google API keys. Simply re
 
 ```
 bundle install
+rake db:create
 rake db:migrate
 rails s
 ```
